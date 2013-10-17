@@ -21,7 +21,8 @@ local function main()
     cclog("result is " .. myadd(3, 5))
 
     ---------------
-
+	print "testsetstet"
+	
     local visibleSize = CCDirector:sharedDirector():getVisibleSize()
     local origin = CCDirector:sharedDirector():getVisibleOrigin()
 
