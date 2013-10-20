@@ -45,10 +45,19 @@ bool AppDelegate::applicationDidFinishLaunching()
     tolua_s = pStack->getLuaState();
     tolua_web_socket_open(tolua_s);
 #endif
-    
-    std::string path = CCFileUtils::sharedFileUtils()->fullPathForFilename("luascripts/main.lua");
+    std::string dirPath = "luascripts";
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    CCString* pstrFileContent = CCString::createWithContentsOfFile((dirPath + "/main.lua").c_str());
+    if(pstrFileContent)
+    {
+        pEngine.executeString(pstrFileContent->getCString());
+    }
+#else
+    std::string path = CCFileUtils::sharedFileUtils()->fullPathForFilename((dirPath +"/main.lua").c_str());
+    //std::string path = CCFileUtils::sharedFileUtils()->fullPathForFilename("hello.lua");
+    pEngine->addSearchPath(path.substr(0, path.find_last_of("/") - dirPath.length()).c_str());
     pEngine->executeScriptFile(path.c_str());
-
+#endif
     return true;
 }
 
