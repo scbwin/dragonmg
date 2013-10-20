@@ -1,5 +1,4 @@
-require "luascripts/ui/LayerLogin/LayerLogin"
-
+require "luascripts/UI/LayerLogin/LayerLogin"
 -- for CCLuaEngine traceback
 function __G__TRACKBACK__(msg)
     print("----------------------------------------")

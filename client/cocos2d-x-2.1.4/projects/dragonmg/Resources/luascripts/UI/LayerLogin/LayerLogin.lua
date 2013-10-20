@@ -65,13 +65,15 @@ local function zhenpin(layer)
     pSpriteDialogLogin:addChild(editBoxPassword,2);
 end
 function LayerLogin()
-	CCSpriteFrameCache:sharedSpriteFrameCache():addSpriteFramesWithFile("ui_login.plist")
+	--CCSpriteFrameCache:sharedSpriteFrameCache():addSpriteFramesWithFile("ui_login.plist")
+    local bg = CCSprite:create("login_back1.jpg")
 	local loginlayer = CCLayer:create()
 	--local winSize = CCDirector:sharedDirector():getWinSize()
-	local bg = CCSprite:createWithSpriteFrame(CCSpriteFrameCache:sharedSpriteFrameCache():spriteFrameByName("login_bkg.png"))
+	--local bg = CCSprite:createWithSpriteFrame(CCSpriteFrameCache:sharedSpriteFrameCache():spriteFrameByName("login_bkg.png"))
 	bg:setPosition(ccp(winSize.width * 0.5, winSize.height * 0.5))
+    bg:setScale(2.0)
 	loginlayer:addChild(bg)
-    zhenpin(loginlayer)
+    --zhenpin(loginlayer)
 	return loginlayer
 end
 
