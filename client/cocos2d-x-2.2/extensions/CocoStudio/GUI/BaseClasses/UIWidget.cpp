@@ -34,7 +34,16 @@ NS_CC_EXT_BEGIN
 #define DYNAMIC_CAST_CCRGBAPROTOCOL dynamic_cast<cocos2d::CCRGBAProtocol*>(m_pRenderer)
 
 #define DYNAMIC_CAST_CCNODERGBA dynamic_cast<GUIRenderer*>(m_pRenderer)
-    
+
+const char* ScriptEvent[TOUCH_EVENT_CANCELED+2] =
+{
+	"pushDown",
+	"move",
+	"releaseUp",
+	"cancelUp",
+	"longClick"
+};
+
 UIWidget::UIWidget():
 m_bEnabled(true),
 m_bVisible(true),
@@ -69,6 +78,7 @@ m_sizePercent(CCPointZero),
 m_ePositionType(POSITION_ABSOLUTE),
 m_positionPercent(CCPointZero),
 m_bIsRunning(false),
+m_nScriptHandler(0),
 
 /*Compatible*/
 m_pPushListener(NULL),
@@ -81,7 +91,7 @@ m_pCancelListener(NULL),
 m_pfnCancelSelector(NULL)
 /************/
 {
-    
+    m_pScript = CCScriptEngineManager::sharedManager()->getScriptEngine();
 }
 
 UIWidget::~UIWidget()
@@ -689,6 +699,31 @@ void UIWidget::onTouchLongClicked(const CCPoint &touchPoint)
     longClickEvent();
 }
 
+void UIWidget::registerEventScript(int nHandler)
+{
+	unregisterEventScript();
+	m_nScriptHandler = nHandler;
+	LUALOG("[LUA] Add CCNode event handler: %d", m_nScriptHandler);
+}
+
+void UIWidget::unregisterEventScript()
+{
+	if (m_nScriptHandler)
+	{
+		m_pScript->removeScriptHandler(m_nScriptHandler);
+		LUALOG("[LUA] Remove CCNode event handler: %d", m_nScriptHandler);
+		m_nScriptHandler = 0;
+	}
+}
+
+void UIWidget::executeScriptEvent(const char* eventName)
+{
+	if(m_nScriptHandler && m_pScript)
+	{
+		m_pScript->executeEvent(m_nScriptHandler,eventName,this,"UIWidget");
+	}
+}
+
 void UIWidget::pushDownEvent()
 {
     /*compatible*/
@@ -702,6 +737,8 @@ void UIWidget::pushDownEvent()
     {
         (m_pTouchEventListener->*m_pfnTouchEventSelector)(this,TOUCH_EVENT_BEGAN);
     }
+
+	executeScriptEvent(ScriptEvent[TOUCH_EVENT_BEGAN]);
 }
 
 void UIWidget::moveEvent()
@@ -717,6 +754,8 @@ void UIWidget::moveEvent()
     {
         (m_pTouchEventListener->*m_pfnTouchEventSelector)(this,TOUCH_EVENT_MOVED);
     }
+
+	executeScriptEvent(ScriptEvent[TOUCH_EVENT_MOVED]);
 }
 
 void UIWidget::releaseUpEvent()
@@ -732,6 +771,8 @@ void UIWidget::releaseUpEvent()
     {
         (m_pTouchEventListener->*m_pfnTouchEventSelector)(this,TOUCH_EVENT_ENDED);
     }
+
+	executeScriptEvent(ScriptEvent[TOUCH_EVENT_ENDED]);
 }
 
 void UIWidget::cancelUpEvent()
@@ -747,11 +788,13 @@ void UIWidget::cancelUpEvent()
     {
         (m_pTouchEventListener->*m_pfnTouchEventSelector)(this,TOUCH_EVENT_CANCELED);
     }
+
+	executeScriptEvent(ScriptEvent[TOUCH_EVENT_CANCELED]);
 }
 
 void UIWidget::longClickEvent()
 {
-    
+    executeScriptEvent(ScriptEvent[TOUCH_EVENT_CANCELED+1]);
 }
 
 void UIWidget::addTouchEventListener(cocos2d::CCObject *target, SEL_TouchEvent selector)

@@ -26,6 +26,12 @@
 
 NS_CC_EXT_BEGIN
 
+const char* CheckBoxScriptEvent[CHECKBOX_STATE_EVENT_UNSELECTED+1] =
+{
+	"selected",
+	"unSelected"
+};
+
 UICheckBox::UICheckBox():
 m_pBackGroundBoxRenderer(NULL),
 m_pBackGroundSelectedBoxRenderer(NULL),
@@ -289,6 +295,8 @@ void UICheckBox::selectedEvent()
     {
         (m_pSelectedStateEventListener->*m_pfnSelectedStateEventSelector)(this,CHECKBOX_STATE_EVENT_SELECTED);
     }
+
+	executeScriptEvent(CheckBoxScriptEvent[CHECKBOX_STATE_EVENT_SELECTED]);
 }
 
 void UICheckBox::unSelectedEvent()
@@ -303,6 +311,8 @@ void UICheckBox::unSelectedEvent()
     {
         (m_pSelectedStateEventListener->*m_pfnSelectedStateEventSelector)(this,CHECKBOX_STATE_EVENT_UNSELECTED);
     }
+
+	executeScriptEvent(CheckBoxScriptEvent[CHECKBOX_STATE_EVENT_UNSELECTED]);
 }
 
 void UICheckBox::addEventListener(cocos2d::CCObject *target, SEL_SelectedStateEvent selector)

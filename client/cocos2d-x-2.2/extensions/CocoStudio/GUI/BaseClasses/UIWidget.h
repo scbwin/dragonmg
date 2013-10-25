@@ -987,6 +987,11 @@ public:
     /*temp action*/
     void setActionTag(int tag);
 	int getActionTag();
+
+	// script support
+	void registerEventScript(int nHandler);
+	void unregisterEventScript();
+	inline int getScriptHandler() { return m_nScriptHandler; };
 protected:
     //call back function called when size changed.
     virtual void onSizeChanged();
@@ -1018,6 +1023,8 @@ protected:
      */
     virtual void releaseResoures();
     void updateSizeAndPosition();
+
+	void executeScriptEvent(const char* eventName);
 protected:
     bool m_bEnabled;            ///< Highest control of widget
     bool m_bVisible;            ///< is this widget visible
@@ -1037,6 +1044,9 @@ protected:
     
     CCObject*       m_pTouchEventListener;
     SEL_TouchEvent    m_pfnTouchEventSelector;
+
+	int							m_nScriptHandler;
+	CCScriptEngineProtocol*		m_pScript;
     
 
     

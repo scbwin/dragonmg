@@ -27,6 +27,14 @@
 
 NS_CC_EXT_BEGIN
 
+const char* ScrollScriptEvent[SCROLLVIEW_EVENT_SCROLL_TO_RIGHT+1] =
+{
+	"scrollToTop",
+	"scrollToBottom",
+	"scrollToLeft",
+	"scrollToRight"
+};
+
 UIScrollView::UIScrollView():
 m_pInnerContainer(NULL),
 m_eDirection(SCROLLVIEW_DIR_VERTICAL),
@@ -631,6 +639,8 @@ void UIScrollView::scrollToTopEvent()
     {
         (m_pEventListener->*m_pfnEventSelector)(this, SCROLLVIEW_EVENT_SCROLL_TO_TOP);
     }
+
+	executeScriptEvent(ScrollScriptEvent[SCROLLVIEW_EVENT_SCROLL_TO_TOP]);
 }
 
 void UIScrollView::scrollToBottomEvent()
@@ -645,6 +655,8 @@ void UIScrollView::scrollToBottomEvent()
     {
         (m_pEventListener->*m_pfnEventSelector)(this, SCROLLVIEW_EVENT_SCROLL_TO_BOTTOM);
     }
+
+	executeScriptEvent(ScrollScriptEvent[SCROLLVIEW_EVENT_SCROLL_TO_BOTTOM]);
 }
 
 void UIScrollView::scrollToLeftEvent()
@@ -659,6 +671,8 @@ void UIScrollView::scrollToLeftEvent()
     {
         (m_pEventListener->*m_pfnEventSelector)(this, SCROLLVIEW_EVENT_SCROLL_TO_LEFT);
     }
+
+	executeScriptEvent(ScrollScriptEvent[SCROLLVIEW_EVENT_SCROLL_TO_LEFT]);
 }
 
 void UIScrollView::scrollToRightEvent()
@@ -673,6 +687,8 @@ void UIScrollView::scrollToRightEvent()
     {
         (m_pEventListener->*m_pfnEventSelector)(this, SCROLLVIEW_EVENT_SCROLL_TO_RIGHT);
     }
+
+	executeScriptEvent(ScrollScriptEvent[SCROLLVIEW_EVENT_SCROLL_TO_RIGHT]);
 }
 
 void UIScrollView::addEventListener(CCObject *target, SEL_ScrollViewEvent selector)

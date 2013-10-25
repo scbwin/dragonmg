@@ -26,6 +26,14 @@
 
 NS_CC_EXT_BEGIN
 
+const char* TextFieldScriptEvent[TEXTFIELD_EVENT_DELETE_BACKWARD+1] =
+{
+	"attachWithIME",
+	"detachWithIME",
+	"insertText",
+	"deleteBackward"
+};
+
 UICCTextField::UICCTextField()
 : m_bMaxLengthEnabled(false)
 , m_nMaxLength(0)
@@ -489,6 +497,8 @@ void UITextField::attachWithIMEEvent()
     {
         (m_pEventListener->*m_pfnEventSelector)(this, TEXTFIELD_EVENT_ATTACH_WITH_IME);
     }
+
+	executeScriptEvent(TextFieldScriptEvent[TEXTFIELD_EVENT_ATTACH_WITH_IME]);
 }
 
 void UITextField::detachWithIMEEvent()
@@ -503,6 +513,8 @@ void UITextField::detachWithIMEEvent()
     {
         (m_pEventListener->*m_pfnEventSelector)(this, TEXTFIELD_EVENT_DETACH_WITH_IME);
     }
+
+	executeScriptEvent(TextFieldScriptEvent[TEXTFIELD_EVENT_DETACH_WITH_IME]);
 }
 
 void UITextField::insertTextEvent()
@@ -517,6 +529,8 @@ void UITextField::insertTextEvent()
     {
         (m_pEventListener->*m_pfnEventSelector)(this, TEXTFIELD_EVENT_INDERT_TEXT);
     }
+
+	executeScriptEvent(TextFieldScriptEvent[TEXTFIELD_EVENT_INDERT_TEXT]);
 }
 
 void UITextField::deleteBackwardEvent()
@@ -531,6 +545,8 @@ void UITextField::deleteBackwardEvent()
     {
         (m_pEventListener->*m_pfnEventSelector)(this, TEXTFIELD_EVENT_DELETE_BACKWARD);
     }
+
+	executeScriptEvent(TextFieldScriptEvent[TEXTFIELD_EVENT_DELETE_BACKWARD]);
 }
 
 void UITextField::addEventListener(CCObject *target, SEL_TextFieldEvent selecor)

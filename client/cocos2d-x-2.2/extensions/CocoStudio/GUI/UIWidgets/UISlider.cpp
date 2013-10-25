@@ -27,6 +27,11 @@
 
 NS_CC_EXT_BEGIN
 
+const char* SliderScriptEvent[SLIDER_PERCENTCHANGED+1] =
+{
+	"percentChanged"
+};
+
 UISlider::UISlider():
 m_pBarRenderer(NULL),
 m_pProgressBarRenderer(NULL),
@@ -434,6 +439,8 @@ void UISlider::percentChangedEvent()
     {
         (m_pSlidPercentListener->*m_pfnSlidPercentSelector)(this,SLIDER_PERCENTCHANGED);
     }
+
+	executeScriptEvent(SliderScriptEvent[SLIDER_PERCENTCHANGED]);
 }
 
 int UISlider::getPercent()

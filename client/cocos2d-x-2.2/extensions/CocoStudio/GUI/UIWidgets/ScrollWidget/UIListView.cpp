@@ -26,6 +26,12 @@
 
 NS_CC_EXT_BEGIN
 
+const char* ListViewScriptEvent[LISTVIEW_EVENT_UPDATE_CHILD+1] =
+{
+	"initChild",
+	"updateChild"
+};
+
 UIListView::UIListView()
 : m_eDirection(LISTVIEW_DIR_VERTICAL)
 , m_eMoveDirection(LISTVIEW_MOVE_DIR_NONE)
@@ -1445,6 +1451,8 @@ void UIListView::initChildEvent()
     {
         (m_pEventListener->*m_pfnEventSelector)(this, LISTVIEW_EVENT_INIT_CHILD);
     }
+
+	executeScriptEvent(ListViewScriptEvent[LISTVIEW_EVENT_INIT_CHILD]);
 }
 
 void UIListView::updateChildEvent()
@@ -1459,6 +1467,8 @@ void UIListView::updateChildEvent()
     {
         (m_pEventListener->*m_pfnEventSelector)(this, LISTVIEW_EVENT_UPDATE_CHILD);
     }
+
+	executeScriptEvent(ListViewScriptEvent[LISTVIEW_EVENT_UPDATE_CHILD]);
 }
 
 void UIListView::addEventListenter(CCObject *target, SEL_ListViewEvent selector)

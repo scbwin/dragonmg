@@ -27,6 +27,26 @@
 
 NS_CC_EXT_BEGIN
 
+const char* DragPanelScriptEvent[DRAGPANEL_EVENT_BOUNCE_BOTTOM+1] =
+{
+	"berthToLeftBottom",
+	"berthToLeftTop",
+	"berthToRightBottom",
+	"berthToRightTop",
+	"berthToLeft",
+	"berthToTop",
+	"berthToRight",
+	"berthToBottom",
+	"bounceToLeftBottom",
+	"bounceToLeftTop",
+	"bounceToRightBottom",
+	"bounceToRightTop",
+	"bounceToLeft",
+	"bounceToTop",
+	"bounceToRight",
+	"bounceToBottom",
+};
+
 UIDragPanel::UIDragPanel()
 : m_pInnerContainer(NULL)
 , m_bTouchPressed(false)
@@ -800,6 +820,8 @@ void UIDragPanel::berthToLeftBottomEvent()
     {
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BERTH_LEFTBOTTOM);
     }
+
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BERTH_LEFTBOTTOM]);
 }
 
 void UIDragPanel::berthToLeftTopEvent()
@@ -814,6 +836,8 @@ void UIDragPanel::berthToLeftTopEvent()
     {
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BERTH_LFETTOP);
     }
+
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BERTH_LFETTOP]);
 }
 
 void UIDragPanel::berthToRightBottomEvent()
@@ -828,6 +852,8 @@ void UIDragPanel::berthToRightBottomEvent()
     {
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BERTH_RIGHTBOTTOM);
     }
+
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BERTH_RIGHTBOTTOM]);
 }
 
 void UIDragPanel::berthToRightTopEvent()
@@ -842,6 +868,8 @@ void UIDragPanel::berthToRightTopEvent()
     {
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BERTH_RIGHTTOP);
     }
+
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BERTH_RIGHTTOP]);
 }
 
 void UIDragPanel::berthToLeftEvent()
@@ -856,6 +884,8 @@ void UIDragPanel::berthToLeftEvent()
     {
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BERTH_LEFT);
     }
+
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BERTH_LEFT]);
 }
 
 void UIDragPanel::berthToTopEvent()
@@ -870,6 +900,8 @@ void UIDragPanel::berthToTopEvent()
     {
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BERTH_TOP);
     }
+
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BERTH_TOP]);
 }
 
 void UIDragPanel::berthToRightEvent()
@@ -884,6 +916,8 @@ void UIDragPanel::berthToRightEvent()
     {
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BERTH_RIGHT);
     }
+
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BERTH_RIGHT]);
 }
 
 void UIDragPanel::berthToBottomEvent()
@@ -898,6 +932,8 @@ void UIDragPanel::berthToBottomEvent()
     {
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BERTH_BOTTOM);
     }
+
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BERTH_BOTTOM]);
 }
 
 void UIDragPanel::addEventListener(CCObject *target, SEL_DragPanelEvent selector)
@@ -1163,6 +1199,7 @@ void UIDragPanel::bounceToLeftBottomEvent()
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BOUNCE_LEFTBOTTOM);
     }
     
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BOUNCE_LEFTBOTTOM]);
 }
 
 void UIDragPanel::bounceToLeftTopEvent()
@@ -1177,6 +1214,8 @@ void UIDragPanel::bounceToLeftTopEvent()
     {
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BOUNCE_LEFTTOP);
     }
+
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BOUNCE_LEFTTOP]);
 }
 
 void UIDragPanel::bounceToRightBottomEvent()
@@ -1191,6 +1230,8 @@ void UIDragPanel::bounceToRightBottomEvent()
     {
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BOUNCE_RIGHTBOTTOM);
     }
+
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BOUNCE_RIGHTBOTTOM]);
 }
 
 void UIDragPanel::bounceToRightTopEvent()
@@ -1205,6 +1246,8 @@ void UIDragPanel::bounceToRightTopEvent()
     {
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BOUNCE_RIGHTTOP);
     }
+
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BOUNCE_RIGHTTOP]);
 }
 
 void UIDragPanel::bounceToLeftEvent()
@@ -1219,6 +1262,8 @@ void UIDragPanel::bounceToLeftEvent()
     {
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BOUNCE_LEFT);
     }
+
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BOUNCE_LEFT]);
 }
 
 void UIDragPanel::bounceToTopEvent()
@@ -1233,6 +1278,8 @@ void UIDragPanel::bounceToTopEvent()
     {
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BOUNCE_TOP);
     }
+
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BOUNCE_TOP]);
 }
 
 void UIDragPanel::bounceToRightEvent()
@@ -1248,6 +1295,7 @@ void UIDragPanel::bounceToRightEvent()
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BOUNCE_RIGHT);
     }
     
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BOUNCE_RIGHT]);
 }
 
 void UIDragPanel::bounceToBottomEvent()
@@ -1262,6 +1310,8 @@ void UIDragPanel::bounceToBottomEvent()
     {
         (m_pEventLister->*m_pfnEventSelector)(this, DRAGPANEL_EVENT_BOUNCE_BOTTOM);
     }
+
+	executeScriptEvent(DragPanelScriptEvent[DRAGPANEL_EVENT_BOUNCE_BOTTOM]);
 }
 
 /*******Compatible*******/
@@ -1493,6 +1543,16 @@ void UIDragPanel::doLayout()
 const char* UIDragPanel::getDescription() const
 {
     return "DragPanel";
+}
+
+void UIDragPanel::setBounceDuratoin(float duration)
+{
+
+}
+
+void UIDragPanel::setBounceEaseRate(float rate)
+{
+
 }
 
 NS_CC_EXT_END

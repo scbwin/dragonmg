@@ -26,6 +26,11 @@
 
 NS_CC_EXT_BEGIN
 
+const char* PageViewScriptEvent[PAGEVIEW_EVENT_TURNING+1] =
+{
+	"initChild",
+};
+
 UIPageView::UIPageView():
 m_nCurPageIdx(0),
 m_pages(NULL),
@@ -562,6 +567,8 @@ void UIPageView::pageTurningEvent()
     {
         (m_pEventListener->*m_pfnEventSelector)(this, PAGEVIEW_EVENT_TURNING);
     }
+
+	executeScriptEvent(PageViewScriptEvent[PAGEVIEW_EVENT_TURNING]);
 }
 
 void UIPageView::addEventListener(CCObject *target, SEL_PageViewEvent selector)

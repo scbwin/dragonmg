@@ -1,0 +1,176 @@
+/**
+ *  drag panel move type
+ */
+enum DRAGPANEL_MOVE_TYPE
+{
+    DRAGPANEL_MOVE_TYPE_NONE,
+    DRAGPANEL_MOVE_TYPE_AUTOMOVE,
+    DRAGPANEL_MOVE_TYPE_BOUNCE,
+};
+
+/**
+ *  dragpanel berth direction 
+ */
+enum DRAGPANEL_BERTH_DIR
+{
+    DRAGPANEL_BERTH_DIR_NONE,
+    DRAGPANEL_BERTH_DIR_LEFTBOTTOM,
+    DRAGPANEL_BERTH_DIR_LFETTOP,
+    DRAGPANEL_BERTH_DIR_RIGHTBOTTOM,
+    DRAGPANEL_BERTH_DIR_RIGHTTOP,
+    DRAGPANEL_BERTH_DIR_LEFT,
+    DRAGPANEL_BERTH_DIR_TOP,
+    DRAGPANEL_BERTH_DIR_RIGHT,
+    DRAGPANEL_BERTH_DIR_BOTTOM,
+};
+
+/**
+ *  dragpanel bounce direction
+ */
+enum DRAGPANEL_BOUNCE_DIR
+{
+    DRAGPANEL_BOUNCE_DIR_NONE,
+    DRAGPANEL_BOUNCE_DIR_LEFTBOTTOM,
+    DRAGPANEL_BOUNCE_DIR_LEFTTOP,
+    DRAGPANEL_BOUNCE_DIR_RIGHTBOTTOM,
+    DRAGPANEL_BOUNCE_DIR_RIGHTTOP,
+    DRAGPANEL_BOUNCE_DIR_LEFT,
+    DRAGPANEL_BOUNCE_DIR_TOP,
+    DRAGPANEL_BOUNCE_DIR_RIGHT,
+    DRAGPANEL_BOUNCE_DIR_BOTTOM,
+};
+
+typedef enum
+{
+    DRAGPANEL_EVENT_BERTH_LEFTBOTTOM,
+    DRAGPANEL_EVENT_BERTH_LFETTOP,
+    DRAGPANEL_EVENT_BERTH_RIGHTBOTTOM,
+    DRAGPANEL_EVENT_BERTH_RIGHTTOP,
+    DRAGPANEL_EVENT_BERTH_LEFT,
+    DRAGPANEL_EVENT_BERTH_TOP,
+    DRAGPANEL_EVENT_BERTH_RIGHT,
+    DRAGPANEL_EVENT_BERTH_BOTTOM,
+    DRAGPANEL_EVENT_BOUNCE_LEFTBOTTOM,
+    DRAGPANEL_EVENT_BOUNCE_LEFTTOP,
+    DRAGPANEL_EVENT_BOUNCE_RIGHTBOTTOM,
+    DRAGPANEL_EVENT_BOUNCE_RIGHTTOP,
+    DRAGPANEL_EVENT_BOUNCE_LEFT,
+    DRAGPANEL_EVENT_BOUNCE_TOP,
+    DRAGPANEL_EVENT_BOUNCE_RIGHT,
+    DRAGPANEL_EVENT_BOUNCE_BOTTOM,
+}DragPanelEventType;
+
+class UIDragPanel : public Layout, public UIScrollInterface
+{
+public:
+    UIDragPanel();
+    virtual ~UIDragPanel();
+    
+    static UIDragPanel* create();        
+    
+    virtual bool onTouchBegan(const CCPoint &touchPoint);
+    virtual void onTouchMoved(const CCPoint &touchPoint);
+    virtual void onTouchEnded(const CCPoint &touchPoint);
+    virtual void onTouchCancelled(const CCPoint &touchPoint);
+    virtual void onTouchLongClicked(const CCPoint &touchPoint);
+    
+    virtual void update(float dt);
+    
+    /**
+     *  add widget child override
+     */
+    virtual bool addChild(UIWidget* widget);
+    /**
+     *  remove widget child override
+     */
+    virtual bool removeChild(UIWidget* child);
+    /**
+     *  remove all widget children override
+     */
+    virtual void removeAllChildren();
+    /**
+     *  get widget children of inner container
+     */
+    virtual CCArray* getChildren();
+    /* gui mark */
+    /**
+     *  get and set inner container size
+     */
+    const CCSize& getInnerContainerSize() const;
+    void setInnerContainerSize(const CCSize &size);
+    /**
+     *  get and set inner container position
+     */
+    const CCPoint& getInnerContainerPosition() const;    
+    void setInnerContainerPosition(const CCPoint& point, bool animated);
+    /**
+     *  set inner container offset
+     */
+    void setInnerContainerOffset(const CCPoint& offset, bool animated);
+    /**/
+    
+    // auto move
+    /**
+     *  set auto move duration
+     */
+    void setAutoMoveDuration(float duration);
+    /**
+     *  set auto move ease rate
+     */
+    void setAutoMoveEaseRate(float rate);        
+    
+    // berth
+    /**
+     *  get berth or not
+     */
+    bool isBerth();
+    
+    /**
+     *  get and set bounce enable
+     */
+    bool isBounceEnabled();
+    void setBounceEnabled(bool bounce);
+    /**
+     *  set bounce duration
+     */
+    void setBounceDuratoin(float duration);
+    /**
+     *  set bounce ease rate
+     */
+    void setBounceEaseRate(float rate);
+    
+    /**
+     * Gets inner container of dragpanel.
+     *
+     * Inner container is the container of dragpanel's children.
+     *
+     * @return inner container.
+     */
+    Layout* getInnerContainer();
+    
+    /**
+     * Sets LayoutType.
+     *
+     * @see LayoutType
+     *
+     * @param LayoutType
+     */
+    virtual void setLayoutType(LayoutType type);
+    
+    /**
+     * Gets LayoutType.
+     *
+     * @see LayoutType
+     *
+     * @return LayoutType
+     */
+    virtual LayoutType getLayoutType() const;
+    
+    virtual void doLayout();
+    
+    /**
+     * Returns the "class name" of widget.
+     */
+    virtual const char* getDescription() const;  
+
+};
