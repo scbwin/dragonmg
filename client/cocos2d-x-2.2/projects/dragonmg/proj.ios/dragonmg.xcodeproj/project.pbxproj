@@ -252,6 +252,7 @@
 		DA2DB317181C34120019D54E /* image in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB313181C34120019D54E /* image */; };
 		DA2DB318181C34120019D54E /* luascripts in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB314181C34120019D54E /* luascripts */; };
 		DA2DB319181C34120019D54E /* music in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB315181C34120019D54E /* music */; };
+		DA30BC4A1824CD19003396C2 /* AssetsManagerEx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA30BC491824CD19003396C2 /* AssetsManagerEx.cpp */; };
 		F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
 		F293B3CF15EB7BE500256477 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CE15EB7BE500256477 /* OpenGLES.framework */; };
 		F293B3D115EB7BE500256477 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D015EB7BE500256477 /* OpenAL.framework */; };
@@ -776,6 +777,8 @@
 		DA2DB313181C34120019D54E /* image */ = {isa = PBXFileReference; lastKnownFileType = folder; path = image; sourceTree = "<group>"; };
 		DA2DB314181C34120019D54E /* luascripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = luascripts; sourceTree = "<group>"; };
 		DA2DB315181C34120019D54E /* music */ = {isa = PBXFileReference; lastKnownFileType = folder; path = music; sourceTree = "<group>"; };
+		DA30BC481824CCFE003396C2 /* AssetsManagerEx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetsManagerEx.h; sourceTree = "<group>"; };
+		DA30BC491824CD19003396C2 /* AssetsManagerEx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AssetsManagerEx.cpp; sourceTree = "<group>"; };
 		F293B3C815EB7BE500256477 /* dragonmg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dragonmg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F293B3CC15EB7BE500256477 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F293B3CE15EB7BE500256477 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1491,6 +1494,8 @@
 			children = (
 				DA2DB238181C2EC20019D54E /* AssetsManager.cpp */,
 				DA2DB239181C2EC20019D54E /* AssetsManager.h */,
+				DA30BC481824CCFE003396C2 /* AssetsManagerEx.h */,
+				DA30BC491824CD19003396C2 /* AssetsManagerEx.cpp */,
 			);
 			path = AssetsManager;
 			sourceTree = "<group>";
@@ -2209,6 +2214,7 @@
 				DA2DB30E181C2ED60019D54E /* json_writer.cpp in Sources */,
 				DA2DB310181C2ED60019D54E /* CCSGUIReader.cpp in Sources */,
 				DA2DB311181C2ED60019D54E /* CCSSceneReader.cpp in Sources */,
+				DA30BC4A1824CD19003396C2 /* AssetsManagerEx.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
