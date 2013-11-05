@@ -346,11 +346,11 @@ void UIButton::onPressStateChangedToNormal()
         m_pButtonClickedRenderer->stopAllActions();
         m_pButtonDisableRenderer->stopAllActions();
         CCAction *zoomAction = CCScaleTo::create(0.05f, 1.0f);
-        CCAction *zoomAction1 = CCScaleTo::create(0.05f, 1.0f);
-        CCAction *zoomAction2 = CCScaleTo::create(0.05f, 1.0f);
+        //CCAction *zoomAction1 = CCScaleTo::create(0.05f, 1.0f);
+        //CCAction *zoomAction2 = CCScaleTo::create(0.05f, 1.0f);
         m_pButtonNormalRenderer->runAction(zoomAction);
-        m_pButtonClickedRenderer->runAction(zoomAction1);
-        m_pButtonDisableRenderer->runAction(zoomAction2);
+        //m_pButtonClickedRenderer->runAction(zoomAction1);
+        //m_pButtonDisableRenderer->runAction(zoomAction2);
     }
 }
 
@@ -364,12 +364,12 @@ void UIButton::onPressStateChangedToPressed()
         m_pButtonNormalRenderer->stopAllActions();
         m_pButtonClickedRenderer->stopAllActions();
         m_pButtonDisableRenderer->stopAllActions();
-        CCAction *zoomAction = CCScaleTo::create(0.05f, 1.1f);
+       // CCAction *zoomAction = CCScaleTo::create(0.05f, 1.1f);
         CCAction *zoomAction1 = CCScaleTo::create(0.05f, 1.1f);
-        CCAction *zoomAction2 = CCScaleTo::create(0.05f, 1.1f);
-        m_pButtonNormalRenderer->runAction(zoomAction);
+       // CCAction *zoomAction2 = CCScaleTo::create(0.05f, 1.1f);
+       // m_pButtonNormalRenderer->runAction(zoomAction);
         m_pButtonClickedRenderer->runAction(zoomAction1);
-        m_pButtonDisableRenderer->runAction(zoomAction2);
+       // m_pButtonDisableRenderer->runAction(zoomAction2);
     }
 }
 

@@ -1,4 +1,5 @@
 require "luascripts/UI/LayerLogin/LayerLogin"
+require "luascripts/UI/buzhen/buzhen.lua"
 -- for CCLuaEngine traceback
 function __G__TRACKBACK__(msg)
     print("----------------------------------------")
@@ -13,11 +14,8 @@ local function main()
 	collectgarbage("setstepmul", 5000)
 	local scene = CCScene:create()
 	--scene:addChild(LayerLogin())
-	local ul = UILayer:create()
-	ul:scheduleUpdateWithPriorityLua(SceneUpdate,-1)
-	ul:addWidget(UIHelper:instance():createWidgetFromJsonFile("game_buzheng/game_buzheng.json"))
-	scene:addChild(ul)
-	CCDirector:sharedDirector():runWithScene(scene)
+	scene:addChild(buzhen())
+	CCDirector:sharedDirector():replaceScene(scene)
 end
 
 xpcall(main, __G__TRACKBACK__)
