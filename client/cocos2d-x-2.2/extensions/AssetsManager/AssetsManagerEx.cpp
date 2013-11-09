@@ -48,19 +48,19 @@ NS_CC_EXT_BEGIN;
 
 struct ErrorMessage
 {
-    AssetsManager::ErrorCode code;
-    AssetsManager* manager;
+    AssetsManagerEx::ErrorCode code;
+    AssetsManagerEx* manager;
 };
 
 struct ProgressMessage
 {
     int percent;
-    AssetsManager* manager;
+    AssetsManagerEx* manager;
 };
 
 // Implementation of AssetsManager
 
-AssetsManager::AssetsManager(const char* packageUrl/* =NULL */, const char* versionFileUrl/* =NULL */, const char* storagePath/* =NULL */)
+AssetsManagerEx::AssetsManagerEx(const char* packageUrl/* =NULL */, const char* versionFileUrl/* =NULL */, const char* storagePath/* =NULL */)
 :  _storagePath(storagePath)
 , _version("")
 , _packageUrl(packageUrl)
@@ -75,7 +75,7 @@ AssetsManager::AssetsManager(const char* packageUrl/* =NULL */, const char* vers
     _schedule = new Helper();
 }
 
-AssetsManager::~AssetsManager()
+AssetsManagerEx::~AssetsManagerEx()
 {
     if (_schedule)
     {
@@ -83,7 +83,7 @@ AssetsManager::~AssetsManager()
     }
 }
 
-void AssetsManager::checkStoragePath()
+void AssetsManagerEx::checkStoragePath()
 {
     if (_storagePath.size() > 0 && _storagePath[_storagePath.size() - 1] != '/')
     {
@@ -99,7 +99,7 @@ static size_t getVersionCode(void *ptr, size_t size, size_t nmemb, void *userdat
     return (size * nmemb);
 }
 
-bool AssetsManager::checkUpdate()
+bool AssetsManagerEx::checkUpdate()
 {
     if (_versionFileUrl.size() == 0) return false;
     
@@ -144,9 +144,9 @@ bool AssetsManager::checkUpdate()
     return true;
 }
 
-void* assetsManagerDownloadAndUncompress(void *data)
+void* assetsManagerExDownloadAndUncompress(void *data)
 {
-    AssetsManager* self = (AssetsManager*)data;
+    AssetsManagerEx* self = (AssetsManagerEx*)data;
     
     do
     {
@@ -155,7 +155,7 @@ void* assetsManagerDownloadAndUncompress(void *data)
             if (! self->downLoad()) break;
             
             // Record downloaded version.
-            AssetsManager::Message *msg1 = new AssetsManager::Message();
+            AssetsManagerEx::Message *msg1 = new AssetsManagerEx::Message();
             msg1->what = ASSETSMANAGER_MESSAGE_RECORD_DOWNLOADED_VERSION;
             msg1->obj = self;
             self->_schedule->sendMessage(msg1);
@@ -164,12 +164,12 @@ void* assetsManagerDownloadAndUncompress(void *data)
         // Uncompress zip file.
         if (! self->uncompress())
         {
-            self->sendErrorMessage(AssetsManager::kUncompress);
+            self->sendErrorMessage(AssetsManagerEx::kUncompress);
             break;
         }
         
         // Record updated version and remove downloaded zip file
-        AssetsManager::Message *msg2 = new AssetsManager::Message();
+        AssetsManagerEx::Message *msg2 = new AssetsManagerEx::Message();
         msg2->what = ASSETSMANAGER_MESSAGE_UPDATE_SUCCEED;
         msg2->obj = self;
         self->_schedule->sendMessage(msg2);
@@ -184,7 +184,7 @@ void* assetsManagerDownloadAndUncompress(void *data)
     return NULL;
 }
 
-void AssetsManager::update()
+void AssetsManagerEx::update()
 {
     if (_tid) return;
     
@@ -205,10 +205,10 @@ void AssetsManager::update()
     _downloadedVersion = CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_DOWNLOADED_VERSION);
     
     _tid = new pthread_t();
-    pthread_create(&(*_tid), NULL, assetsManagerDownloadAndUncompress, this);
+    pthread_create(&(*_tid), NULL, assetsManagerExDownloadAndUncompress, this);
 }
 
-bool AssetsManager::uncompress()
+bool AssetsManagerEx::uncompress()
 {
     // Open the zip file
     string outFileName = _storagePath + TEMP_PACKAGE_FILE_NAME;
@@ -335,7 +335,7 @@ bool AssetsManager::uncompress()
 /*
  * Create a direcotry is platform depended.
  */
-bool AssetsManager::createDirectory(const char *path)
+bool AssetsManagerEx::createDirectory(const char *path)
 {
 #if (CC_TARGET_PLATFORM != CC_PLATFORM_WIN32)
     mode_t processMask = umask(0);
@@ -357,7 +357,7 @@ bool AssetsManager::createDirectory(const char *path)
 #endif
 }
 
-void AssetsManager::setSearchPath()
+void AssetsManagerEx::setSearchPath()
 {
     vector<string> searchPaths = CCFileUtils::sharedFileUtils()->getSearchPaths();
     vector<string>::iterator iter = searchPaths.begin();
@@ -372,10 +372,10 @@ static size_t downLoadPackage(void *ptr, size_t size, size_t nmemb, void *userda
     return written;
 }
 
-int assetsManagerProgressFunc(void *ptr, double totalToDownload, double nowDownloaded, double totalToUpLoad, double nowUpLoaded)
+int assetsManagerExProgressFunc(void *ptr, double totalToDownload, double nowDownloaded, double totalToUpLoad, double nowUpLoaded)
 {
-    AssetsManager* manager = (AssetsManager*)ptr;
-    AssetsManager::Message *msg = new AssetsManager::Message();
+    AssetsManagerEx* manager = (AssetsManagerEx*)ptr;
+    AssetsManagerEx::Message *msg = new AssetsManagerEx::Message();
     msg->what = ASSETSMANAGER_MESSAGE_PROGRESS;
     
     ProgressMessage *progressData = new ProgressMessage();
@@ -390,7 +390,7 @@ int assetsManagerProgressFunc(void *ptr, double totalToDownload, double nowDownl
     return 0;
 }
 
-bool AssetsManager::downLoad()
+bool AssetsManagerEx::downLoad()
 {
     // Create a file to save package.
     string outFileName = _storagePath + TEMP_PACKAGE_FILE_NAME;
@@ -408,7 +408,7 @@ bool AssetsManager::downLoad()
     curl_easy_setopt(_curl, CURLOPT_WRITEFUNCTION, downLoadPackage);
     curl_easy_setopt(_curl, CURLOPT_WRITEDATA, fp);
     curl_easy_setopt(_curl, CURLOPT_NOPROGRESS, false);
-    curl_easy_setopt(_curl, CURLOPT_PROGRESSFUNCTION, assetsManagerProgressFunc);
+    curl_easy_setopt(_curl, CURLOPT_PROGRESSFUNCTION, assetsManagerExProgressFunc);
     curl_easy_setopt(_curl, CURLOPT_PROGRESSDATA, this);
     res = curl_easy_perform(_curl);
     curl_easy_cleanup(_curl);
@@ -426,63 +426,63 @@ bool AssetsManager::downLoad()
     return true;
 }
 
-const char* AssetsManager::getPackageUrl() const
+const char* AssetsManagerEx::getPackageUrl() const
 {
     return _packageUrl.c_str();
 }
 
-void AssetsManager::setPackageUrl(const char *packageUrl)
+void AssetsManagerEx::setPackageUrl(const char *packageUrl)
 {
     _packageUrl = packageUrl;
 }
 
-const char* AssetsManager::getStoragePath() const
+const char* AssetsManagerEx::getStoragePath() const
 {
     return _storagePath.c_str();
 }
 
-void AssetsManager::setStoragePath(const char *storagePath)
+void AssetsManagerEx::setStoragePath(const char *storagePath)
 {
     _storagePath = storagePath;
     checkStoragePath();
 }
 
-const char* AssetsManager::getVersionFileUrl() const
+const char* AssetsManagerEx::getVersionFileUrl() const
 {
     return _versionFileUrl.c_str();
 }
 
-void AssetsManager::setVersionFileUrl(const char *versionFileUrl)
+void AssetsManagerEx::setVersionFileUrl(const char *versionFileUrl)
 {
     _versionFileUrl = versionFileUrl;
 }
 
-string AssetsManager::getVersion()
+string AssetsManagerEx::getVersion()
 {
     return CCUserDefault::sharedUserDefault()->getStringForKey(KEY_OF_VERSION);
 }
 
-void AssetsManager::deleteVersion()
+void AssetsManagerEx::deleteVersion()
 {
     CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_VERSION, "");
 }
 
-void AssetsManager::setDelegate(AssetsManagerDelegateProtocol *delegate)
+void AssetsManagerEx::setDelegate(AssetsManagerDelegateProtocolEx *delegate)
 {
     _delegate = delegate;
 }
 
-void AssetsManager::setConnectionTimeout(unsigned int timeout)
+void AssetsManagerEx::setConnectionTimeout(unsigned int timeout)
 {
     _connectionTimeout = timeout;
 }
 
-unsigned int AssetsManager::getConnectionTimeout()
+unsigned int AssetsManagerEx::getConnectionTimeout()
 {
     return _connectionTimeout;
 }
 
-void AssetsManager::sendErrorMessage(AssetsManager::ErrorCode code)
+void AssetsManagerEx::sendErrorMessage(AssetsManagerEx::ErrorCode code)
 {
     Message *msg = new Message();
     msg->what = ASSETSMANAGER_MESSAGE_ERROR;
@@ -497,27 +497,27 @@ void AssetsManager::sendErrorMessage(AssetsManager::ErrorCode code)
 
 // Implementation of AssetsManagerHelper
 
-AssetsManager::Helper::Helper()
+AssetsManagerEx::Helper::Helper()
 {
     _messageQueue = new list<Message*>();
     pthread_mutex_init(&_messageQueueMutex, NULL);
     CCDirector::sharedDirector()->getScheduler()->scheduleUpdateForTarget(this, 0, false);
 }
 
-AssetsManager::Helper::~Helper()
+AssetsManagerEx::Helper::~Helper()
 {
     CCDirector::sharedDirector()->getScheduler()->unscheduleAllForTarget(this);
     delete _messageQueue;
 }
 
-void AssetsManager::Helper::sendMessage(Message *msg)
+void AssetsManagerEx::Helper::sendMessage(Message *msg)
 {
     pthread_mutex_lock(&_messageQueueMutex);
     _messageQueue->push_back(msg);
     pthread_mutex_unlock(&_messageQueueMutex);
 }
 
-void AssetsManager::Helper::update(float dt)
+void AssetsManagerEx::Helper::update(float dt)
 {
     Message *msg = NULL;
     
@@ -541,7 +541,7 @@ void AssetsManager::Helper::update(float dt)
             break;
         case ASSETSMANAGER_MESSAGE_RECORD_DOWNLOADED_VERSION:
             CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_DOWNLOADED_VERSION,
-                                                                ((AssetsManager*)msg->obj)->_version.c_str());
+                                                                ((AssetsManagerEx*)msg->obj)->_version.c_str());
             CCUserDefault::sharedUserDefault()->flush();
             
             break;
@@ -571,9 +571,9 @@ void AssetsManager::Helper::update(float dt)
     delete msg;
 }
 
-void AssetsManager::Helper::handleUpdateSucceed(Message *msg)
+void AssetsManagerEx::Helper::handleUpdateSucceed(Message *msg)
 {
-    AssetsManager* manager = (AssetsManager*)msg->obj;
+    AssetsManagerEx* manager = (AssetsManagerEx*)msg->obj;
     
     // Record new version code.
     CCUserDefault::sharedUserDefault()->setStringForKey(KEY_OF_VERSION, manager->_version.c_str());

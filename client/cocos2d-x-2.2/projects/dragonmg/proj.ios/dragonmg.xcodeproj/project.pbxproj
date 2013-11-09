@@ -248,11 +248,11 @@
 		DA2DB30F181C2ED60019D54E /* sconscript in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB2CB181C2ED60019D54E /* sconscript */; };
 		DA2DB310181C2ED60019D54E /* CCSGUIReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB2CF181C2ED60019D54E /* CCSGUIReader.cpp */; };
 		DA2DB311181C2ED60019D54E /* CCSSceneReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA2DB2D1181C2ED60019D54E /* CCSSceneReader.cpp */; };
-		DA2DB316181C34120019D54E /* game_buzheng in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB312181C34120019D54E /* game_buzheng */; };
 		DA2DB317181C34120019D54E /* image in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB313181C34120019D54E /* image */; };
 		DA2DB318181C34120019D54E /* luascripts in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB314181C34120019D54E /* luascripts */; };
 		DA2DB319181C34120019D54E /* music in Resources */ = {isa = PBXBuildFile; fileRef = DA2DB315181C34120019D54E /* music */; };
 		DA30BC4A1824CD19003396C2 /* AssetsManagerEx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DA30BC491824CD19003396C2 /* AssetsManagerEx.cpp */; };
+		DADAD508182E247200D6A4EF /* buzhen in Resources */ = {isa = PBXBuildFile; fileRef = DADAD507182E247200D6A4EF /* buzhen */; };
 		F293B3CD15EB7BE500256477 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CC15EB7BE500256477 /* QuartzCore.framework */; };
 		F293B3CF15EB7BE500256477 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3CE15EB7BE500256477 /* OpenGLES.framework */; };
 		F293B3D115EB7BE500256477 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F293B3D015EB7BE500256477 /* OpenAL.framework */; };
@@ -773,12 +773,12 @@
 		DA2DB2D0181C2ED60019D54E /* CCSGUIReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSGUIReader.h; sourceTree = "<group>"; };
 		DA2DB2D1181C2ED60019D54E /* CCSSceneReader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCSSceneReader.cpp; sourceTree = "<group>"; };
 		DA2DB2D2181C2ED60019D54E /* CCSSceneReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCSSceneReader.h; sourceTree = "<group>"; };
-		DA2DB312181C34120019D54E /* game_buzheng */ = {isa = PBXFileReference; lastKnownFileType = folder; path = game_buzheng; sourceTree = "<group>"; };
 		DA2DB313181C34120019D54E /* image */ = {isa = PBXFileReference; lastKnownFileType = folder; path = image; sourceTree = "<group>"; };
 		DA2DB314181C34120019D54E /* luascripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = luascripts; sourceTree = "<group>"; };
 		DA2DB315181C34120019D54E /* music */ = {isa = PBXFileReference; lastKnownFileType = folder; path = music; sourceTree = "<group>"; };
 		DA30BC481824CCFE003396C2 /* AssetsManagerEx.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssetsManagerEx.h; sourceTree = "<group>"; };
 		DA30BC491824CD19003396C2 /* AssetsManagerEx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AssetsManagerEx.cpp; sourceTree = "<group>"; };
+		DADAD507182E247200D6A4EF /* buzhen */ = {isa = PBXFileReference; lastKnownFileType = folder; path = buzhen; sourceTree = "<group>"; };
 		F293B3C815EB7BE500256477 /* dragonmg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dragonmg.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F293B3CC15EB7BE500256477 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		F293B3CE15EB7BE500256477 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1858,7 +1858,7 @@
 		F293BC4615EB859D00256477 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				DA2DB312181C34120019D54E /* game_buzheng */,
+				DADAD507182E247200D6A4EF /* buzhen */,
 				DA2DB313181C34120019D54E /* image */,
 				DA2DB314181C34120019D54E /* luascripts */,
 				DA2DB315181C34120019D54E /* music */,
@@ -1957,10 +1957,10 @@
 				DA2DB30A181C2ED60019D54E /* json_internalmap.inl in Resources */,
 				DA2DB30D181C2ED60019D54E /* json_valueiterator.inl in Resources */,
 				DA2DB30F181C2ED60019D54E /* sconscript in Resources */,
-				DA2DB316181C34120019D54E /* game_buzheng in Resources */,
 				DA2DB317181C34120019D54E /* image in Resources */,
 				DA2DB318181C34120019D54E /* luascripts in Resources */,
 				DA2DB319181C34120019D54E /* music in Resources */,
+				DADAD508182E247200D6A4EF /* buzhen in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2259,6 +2259,8 @@
 					"$(SRCROOT)/../../external/lua/cocos2dx_support",
 					"$(SRCROOT)/../../cocos2dx/platform/ios",
 					"$(SRCROOT)/../../cocos2dx/include",
+					"$(SRCROOT)/../../extensions/",
+					"$(SRCROOT)/../../extensions/AssetsManager/",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				SDKROOT = iphoneos;
@@ -2292,6 +2294,8 @@
 					"$(SRCROOT)/../../external/lua/cocos2dx_support",
 					"$(SRCROOT)/../../cocos2dx/platform/ios",
 					"$(SRCROOT)/../../cocos2dx/include",
+					"$(SRCROOT)/../../extensions/",
+					"$(SRCROOT)/../../extensions/AssetsManager/",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";

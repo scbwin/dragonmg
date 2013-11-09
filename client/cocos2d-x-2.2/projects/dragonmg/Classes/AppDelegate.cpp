@@ -39,12 +39,16 @@ bool AppDelegate::applicationDidFinishLaunching()
     // set FPS. the default value is 1.0/60 if you don't call this
     pDirector->setAnimationInterval(1.0 / 60);
 
-	//pDirector->getOpenGLView()->setFrameSize(960,480);
+	//pDirector->getOpenGLView()->setFrameSize(480,320);
 	//pDirector->getOpenGLView()->setFrameZoomFactor(2.0);
 
 	//pDirector->getOpenGLView()->setEditorFrameSize(480,320);
 	//pDirector->setContentScaleFactor(0.5);
-	//pDirector->getOpenGLView()->setDesignResolutionSize(480,320, kResolutionExactFit);
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+	pDirector->getOpenGLView()->setDesignResolutionSize(480,320, kResolutionExactFit);
+#else 
+    pDirector->getOpenGLView()->setDesignResolutionSize(960,480, kResolutionExactFit);
+#endif
 	CCScene* scene = CCScene::create();
 	UpdateLayer *updateLayer = new UpdateLayer();
 	scene->addChild(updateLayer);
@@ -89,8 +93,6 @@ bool UpdateLayer::init()
 	CCLayer::init();
 
 	createDownLoadedDir();
-
-	CCSize size = CCDirector::sharedDirector()->getWinSize();
 
 	pProgressLabel = CCLabelTTF::create("", "hycc.ttf",20);
 	pProgressLabel->setPosition(ccp(100,50));

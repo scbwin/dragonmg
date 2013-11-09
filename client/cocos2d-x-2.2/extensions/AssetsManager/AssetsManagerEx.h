@@ -113,7 +113,7 @@ public:
     
     /** @brief Sets delegate, the delegate will receive messages
      */
-    void setDelegate(AssetsManagerDelegateProtocol *delegate);
+    void setDelegate(AssetsManagerDelegateProtocolEx *delegate);
     
     /** @brief Sets connection time out in seconds
      */
@@ -125,8 +125,8 @@ public:
     
     /* downloadAndUncompress is the entry of a new thread
      */
-    friend void* assetsManagerDownloadAndUncompress(void*);
-    friend int assetsManagerProgressFunc(void *, double, double, double, double);
+    friend void* assetsManagerExDownloadAndUncompress(void*);
+    friend int assetsManagerExProgressFunc(void *, double, double, double, double);
     
 protected:
     bool downLoad();
@@ -178,7 +178,7 @@ private:
     pthread_t *_tid;
     unsigned int _connectionTimeout;
     
-    AssetsManagerDelegateProtocol *_delegate; // weak reference
+    AssetsManagerDelegateProtocolEx *_delegate; // weak reference
 };
 
 class AssetsManagerDelegateProtocolEx

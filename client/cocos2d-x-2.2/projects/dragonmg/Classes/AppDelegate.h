@@ -3,7 +3,11 @@
 
 #include "CCApplication.h"
 #include "cocos2d.h"
+#if CC_TARGET_PLATFORM == CC_PLATFORM_IOS
+#include "AssetsManager.h"
+#else
 #include "AssetsManager\AssetsManager.h"
+#endif
 
 /**
 @brief    The cocos2d Application.

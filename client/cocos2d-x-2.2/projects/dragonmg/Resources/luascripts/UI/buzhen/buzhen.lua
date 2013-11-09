@@ -58,9 +58,25 @@ function changeToPage(index)
     tab02:registerEventScript(tab2buttonEvent)
     local tab03 = ul:getWidgetByName("tab03")
     tab03:registerEventScript(tab3buttonEvent)
+    if curindex == 1 then
+        tab01:setBrightStyle(BRIGHT_NORMAL)
+    else 
+        tab01:setBrightStyle(BRIGHT_HIGHLIGHT)
+    end
+    if curindex == 2 then
+        tab02:setBrightStyle(BRIGHT_NORMAL)
+    else 
+        tab02:setBrightStyle(BRIGHT_HIGHLIGHT)
+    end
+    if curindex == 3 then
+        tab03:setBrightStyle(BRIGHT_NORMAL)
+    else 
+        tab03:setBrightStyle(BRIGHT_HIGHLIGHT)
+    end
 
     scene:addChild(ul)
     --scene = CCTransitionCrossFade:create(pagedeltatime, scene)
+    CCDirector:sharedDirector():setDepthTest(true)
     scene = CCTransitionPageTurn:create(pagedeltatime, scene, false)
     CCDirector:sharedDirector():replaceScene(scene)
 end
