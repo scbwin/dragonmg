@@ -44,7 +44,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 
 	//pDirector->getOpenGLView()->setEditorFrameSize(480,320);
 	//pDirector->setContentScaleFactor(0.5);
-	pDirector->getOpenGLView()->setDesignResolutionSize(480,320, kResolutionExactFit);
+	//pDirector->getOpenGLView()->setDesignResolutionSize(480,320, kResolutionExactFit);
 	CCScene* scene = CCScene::create();
 	UpdateLayer *updateLayer = new UpdateLayer();
 	scene->addChild(updateLayer);
