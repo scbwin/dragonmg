@@ -2,8 +2,11 @@ local uiwidget1 = nil
 local uiwidget2 = nil
 local uiwidget3 = nil
 local curindex = 0
-local pagedeltatime = 1
+local pagedeltatime = 0.5
 local changeToPage
+require "luascripts/UI/buzhen/buzhenpage1"
+require "luascripts/UI/buzhen/buzhenpage2"
+require "luascripts/UI/buzhen/buzhenpage3"
 
 local function closebuttonEvent(eventType)
     if eventType == "pushDown" then
@@ -47,6 +50,7 @@ function changeToPage(index)
     elseif index == 3 then 
         curindex = 3
         ul:addWidget(uiwidget3)
+        addPage3CallBack(ul)
     end
     local closebutton = ul:getWidgetByName("close_btn")
        
@@ -103,8 +107,10 @@ function buzhen()
     closebutton:registerEventScript(closebuttonEvent) 
     local tab01 = ul:getWidgetByName("tab01")
     tab01:registerEventScript(tab1buttonEvent)
+    tab01:setBrightStyle(BRIGHT_HIGHLIGHT)
     local tab03 = ul:getWidgetByName("tab03")
     tab03:registerEventScript(tab3buttonEvent)
+    tab03:setBrightStyle(BRIGHT_HIGHLIGHT)
 
 	return ul
 end
